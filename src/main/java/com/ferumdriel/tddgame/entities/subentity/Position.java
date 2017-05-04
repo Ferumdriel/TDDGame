@@ -16,16 +16,22 @@ public class Position{
         setPosition(x,y);
     }
 
-    public void move(String e){
-        if(e.equals("w")){
-            y--;
-        }else if(e.equals("s")){
-            y++;
-        }else if(e.equals("a")){
-            x--;
-        }else if(e.equals("d")){
-            x++;
-        }
+
+
+    public void moveRight(){
+        x++;
+    }
+
+    public void moveLeft(){
+        x--;
+    }
+
+    public void moveUp(){
+        y--;
+    }
+
+    public void moveDown(){
+        y++;
     }
 
     public int getX() {
@@ -53,4 +59,13 @@ public class Position{
         return new Position(this.getX(),this.getY());
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Position position = (Position) obj;
+        if(getX() != position.getX()) return false;
+        if(getY() != position.getY()) return false;
+        return true;
+    }
 }

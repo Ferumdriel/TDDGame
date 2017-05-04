@@ -34,9 +34,35 @@ public class PositionTest{
     @Test
     public void whenRightThenAddToX(){
         x++;
-        String movement = "d"; //WSAD
-        position.move(movement);
+//        String movement = "d"; //WSAD
+//        position.move(movement);
+        position.moveRight();
         Assert.assertEquals(position.getX(),x);
     }
+    @Test
+    public void whenLeftThenSubFromX(){
+        x--;
+//        String movement = "a"; //WSAD
+//        position.move(movement);
+        position.moveLeft();
+        Assert.assertEquals(position.getX(),x);
+    }
+    @Test
+    public void whenUpThenSubbFromY(){
+        y--;
+//        String movement = "w"; //WSAD
+//        position.move(movement);
+        position.moveUp();
+        Assert.assertEquals(position.getY(),y);
+    }
+    @Test
+    public void whenDownThenAddToY(){
+        y++;
+//        String movement = "s"; //WSAD
+//        position.move(movement);
+        position.moveDown();
+        Assert.assertEquals(position.getY(),y);
+    }
+
 
 }

@@ -12,12 +12,12 @@ public class EntityTest {
 
     private Entity entity;
     private String expName;
-    private Position expPosition;
+    private Position position;
     @Before
     public void setUp() {
-        expPosition = new Position(1,1);
+        position = new Position(1,1);
         expName = "Bogdan";
-        entity = new Entity(expName, expPosition);
+        entity = new Entity(expName, position);
     }
 
     @Test
@@ -27,11 +27,45 @@ public class EntityTest {
 
     @Test
     public void whenInstantiatedThenPositionIsSet(){
-        Assert.assertEquals(entity.getPosition(), expPosition);
+        Assert.assertEquals(entity.getPosition(), position);
     }
 
     @Test
     public void whenRightThenGoRight(){
-
+        Position expected = position.copy();
+        expected.moveRight();
+        entity.moveRight();
+        Assert.assertEquals(entity.getPosition(),expected);
+    }
+    @Test
+    public void whenLeftThenGoLeft(){
+        Position expected = position.copy();
+        expected.moveLeft();
+        entity.moveLeft();
+        Assert.assertEquals(entity.getPosition(),expected);
+    }
+    @Test
+    public void whenUpThenGoUp(){
+        Position expected = position.copy();
+        expected.moveUp();
+        entity.moveUp();
+        Assert.assertEquals(entity.getPosition(),expected);
+    }
+    @Test
+    public void whenDownThenGoDown(){
+        Position expected = position.copy();
+        expected.moveDown();
+        entity.moveDown();
+        Assert.assertEquals(entity.getPosition(),expected);
+    }
+    @Test
+    public void whenReceiveCommandsThenAllAreExecuted(){
+        Position expected = position.copy();
+        expected.moveRight();
+        expected.moveRight();
+        expected.moveUp();
+        expected.moveUp();
+        entity.sequenceCommand("ddww");
+        Assert.assertEquals(entity.getPosition(),expected);
     }
 }
