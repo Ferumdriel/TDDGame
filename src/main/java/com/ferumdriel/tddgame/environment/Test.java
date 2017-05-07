@@ -1,8 +1,11 @@
 package com.ferumdriel.tddgame.environment;
 
+import com.ferumdriel.tddgame.entities.Entity;
+import com.ferumdriel.tddgame.entities.supportive.Position;
 import com.ferumdriel.tddgame.environment.maps.Map;
 
 import java.io.*;
+import java.util.ArrayList;
 
 /**
  * Created by Binio on 2017-05-05.
@@ -42,9 +45,22 @@ public class Test {
     }
 
     public static void main(String[] args){
-        Map.MapBuilder builder = new Map.MapBuilder(5,10);
-        Map map = builder.getMap();
-        map.showMap();
+        ArrayList<Entity> testowa = new ArrayList<Entity>();
+        System.out.println(testowa.isEmpty());
+//        String s = "test";
+//        Position pos = new Position(1,1);
+//        Entity e = new Entity(s, pos);
+//        Entity e1 = e.copy();
+//        e.setName("jebaited");
+//        System.out.println(e.getName());
+//        System.out.println(e1.getName());
+//        String p = s;
+//        p = "bum";
+//        System.out.println(s + p);
+
+//        Map.MapBuilder builder = new Map.MapBuilder(5,10);
+//        Map map = builder.getMap();
+//        map.showMap();
 
 //        Test test = new Test("kajak");
 //        test.read();

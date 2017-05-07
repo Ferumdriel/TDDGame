@@ -1,10 +1,8 @@
-package com.ferumdriel.tddgame.entities.subentity;
+package com.ferumdriel.tddgame.entities.supportive;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.awt.event.KeyEvent;
 
 /**
  * Created by Binio on 2017-05-02.

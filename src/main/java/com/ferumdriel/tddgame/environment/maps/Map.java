@@ -1,5 +1,12 @@
 package com.ferumdriel.tddgame.environment.maps;
 
+import com.ferumdriel.tddgame.entities.Entity;
+import com.ferumdriel.tddgame.entities.supportive.Position;
+import com.ferumdriel.tddgame.environment.TerrainType;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Created by Binio on 2017-05-05.
  */
@@ -7,11 +14,13 @@ public class Map {
     private int[][] map;
     private int rows;
     private int columns;
+    private ArrayList<Entity> activeEntities;
 
     private Map(MapBuilder mapBuilder){
         this.rows = mapBuilder.rows;
         this.columns = mapBuilder.columns;
         this.map = mapBuilder.map;
+        activeEntities = new ArrayList<Entity>();
     }
 
     public int[][] getMap() {
@@ -38,6 +47,18 @@ public class Map {
         this.columns = columns;
     }
 
+    public ArrayList<Entity> getActiveEntities() {
+        return activeEntities;
+    }
+
+    public Entity findPlayerOnList(Entity e){
+        Entity tmp = null;
+        for(Entity entities: activeEntities){
+            if(entities == e) tmp = e;
+        }
+        return tmp;
+    }
+
     public void showMap(){
         String s = "";
         for(int i = 0; i < rows; i++){
@@ -49,6 +70,17 @@ public class Map {
         System.out.println(s);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Map map1 = (Map) o;
+
+        if (rows != map1.rows) return false;
+        if (columns != map1.columns) return false;
+        return Arrays.deepEquals(map, map1.map);
+    }
 
     public static class MapBuilder implements MapBuilderInterface {
         private int[][] map;
@@ -99,4 +131,5 @@ public class Map {
 
 
     }
+
 }

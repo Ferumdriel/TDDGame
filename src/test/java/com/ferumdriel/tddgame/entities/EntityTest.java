@@ -1,6 +1,7 @@
 package com.ferumdriel.tddgame.entities;
 
-import com.ferumdriel.tddgame.entities.subentity.Position;
+import com.ferumdriel.tddgame.entities.supportive.Position;
+import com.ferumdriel.tddgame.environment.maps.Map;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,21 +14,23 @@ public class EntityTest {
     private Entity entity;
     private String expName;
     private Position position;
+    Map map;
     @Before
     public void setUp() {
-        position = new Position(1,1);
+        map = new Map.MapBuilder(10,10).getMap();
+        position = new Position(5,5);
         expName = "Bogdan";
-        entity = new Entity(expName, position);
+        entity = new Entity(expName, position, map);
     }
 
     @Test
     public void whenInstantiatedThenNameIsSet(){
-        Assert.assertEquals(entity.getName(), expName);
+        Assert.assertEquals(expName,entity.getName());
     }
 
     @Test
     public void whenInstantiatedThenPositionIsSet(){
-        Assert.assertEquals(entity.getPosition(), position);
+        Assert.assertEquals(position,entity.getPosition());
     }
 
     @Test
@@ -35,28 +38,28 @@ public class EntityTest {
         Position expected = position.copy();
         expected.moveRight();
         entity.moveRight();
-        Assert.assertEquals(entity.getPosition(),expected);
+        Assert.assertEquals(expected,entity.getPosition());
     }
     @Test
     public void whenLeftThenGoLeft(){
         Position expected = position.copy();
         expected.moveLeft();
         entity.moveLeft();
-        Assert.assertEquals(entity.getPosition(),expected);
+        Assert.assertEquals(expected,entity.getPosition());
     }
     @Test
     public void whenUpThenGoUp(){
         Position expected = position.copy();
         expected.moveUp();
         entity.moveUp();
-        Assert.assertEquals(entity.getPosition(),expected);
+        Assert.assertEquals(expected,entity.getPosition());
     }
     @Test
     public void whenDownThenGoDown(){
         Position expected = position.copy();
         expected.moveDown();
         entity.moveDown();
-        Assert.assertEquals(entity.getPosition(),expected);
+        Assert.assertEquals(expected,entity.getPosition());
     }
     @Test
     public void whenReceiveCommandsThenAllAreExecuted(){
@@ -66,6 +69,12 @@ public class EntityTest {
         expected.moveUp();
         expected.moveUp();
         entity.sequenceCommand("ddww");
-        Assert.assertEquals(entity.getPosition(),expected);
+        Assert.assertEquals(expected,entity.getPosition());
+    }
+    @Test
+    public void whenEntityHitsObstacleThenStay(){
+        Position positionNearObstacle = new Position(5,1);
+        entity.sequenceCommand("wwwww");
+        Assert.assertEquals(positionNearObstacle,entity.getPosition());
     }
 }

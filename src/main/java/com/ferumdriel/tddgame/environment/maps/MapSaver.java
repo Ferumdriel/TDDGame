@@ -1,5 +1,7 @@
 package com.ferumdriel.tddgame.environment.maps;
 
+import com.ferumdriel.parser.JSONCreator;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,7 +10,7 @@ import java.io.IOException;
  * Created by Binio on 2017-05-05.
  */
 public class MapSaver {
-    public static String dirPath = "src/main/resources/maps/";
+    public static String dirPath = "src/genRes/maps/";
 //    public static String dirTest = MapSaver.class.getClassLoader().getResource(dirPath).getPath();
 
     public static void saveMap(Map map, String name) {
@@ -16,19 +18,18 @@ public class MapSaver {
         mapSaverHelper.saveMap(map, name);
     }
 
+
     private static class MapSaverHelper {
         void saveMap(Map map, String name) {
-        ClassLoader classLoader = getClass().getClassLoader();
+//        ClassLoader classLoader = getClass().getClassLoader();
             try {
                 File dir = new File(dirPath);
                 dir.mkdirs();
-                File file = new File(getClass().getResource(name + ".txt").getFile());
+                File file = new File(dirPath + "/" + name + "txt");
                 FileWriter writer = new FileWriter(file);
                 writer.write(prepareMapToString(map));
                 writer.close();
             } catch (IOException e) {
-                e.printStackTrace();
-            }catch (NullPointerException e){
                 e.printStackTrace();
             }
         }
@@ -46,7 +47,11 @@ public class MapSaver {
     }
 
     public static void main(String[] args){
-//        Map map = new Map(10,10);
+        Map map = new Map.MapBuilder(10,10).getMap();
 //        MapSaver.saveMap(map,"testowe");
+
+        JSONCreator.createJsonFromObject((Map) map, MapSaver.dirPath, "testowe");
     }
+
+
 }

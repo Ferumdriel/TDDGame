@@ -1,9 +1,5 @@
-package com.ferumdriel.tddgame.entities.subentity;
+package com.ferumdriel.tddgame.entities.supportive;
 
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 
 /**
  * Created by Binio on 2017-05-02.
@@ -18,20 +14,20 @@ public class Position{
 
 
 
-    public void moveRight(){
-        x++;
+    public Position moveRight(){
+        return new Position(x++,y);
     }
 
-    public void moveLeft(){
-        x--;
+    public Position moveLeft(){
+        return new Position(x--,y);
     }
 
-    public void moveUp(){
-        y--;
+    public Position moveUp(){
+        return new Position(x,y--);
     }
 
-    public void moveDown(){
-        y++;
+    public Position moveDown(){
+        return new Position(x,y++);
     }
 
     public int getX() {
@@ -53,6 +49,10 @@ public class Position{
     public void setPosition(int x, int y){
         this.x = x;
         this.y = y;
+    }
+
+    public String toString(){
+        return "x=" + x + ", y=" + y;
     }
 
     public Position copy(){
